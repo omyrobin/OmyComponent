@@ -1,0 +1,110 @@
+ext {
+    //设置公共的application模式下的配置
+    setAppDefaultConfig = {
+        project ->
+            project.apply plugin: 'com.android.application'
+            project.apply plugin: 'kotlin-android'
+            project.apply plugin: 'kotlin-android-extensions'
+            project.description "app"
+            //公共的android{}闭包中的配置
+            setAndroidConfig project.android
+            //复写android{}闭包中defaultConfig{}闭包中的配置 如果和之前的defaultConfig中参数相同会被下方的覆盖
+            project.android {
+                defaultConfig {
+                    //设置application模式下的applicationId 必须有
+                    applicationId rootProject.ext.defaultConfig.applicationId + "." + project.name
+                }
+            }
+            //公共的dependencies{}闭包中的依赖
+            setDependencies project.dependencies
+    }
+
+    //设置公共的library模式下的配置
+    setLibDefaultConfig = {
+        project ->
+            project.apply plugin: 'com.android.library'
+            project.apply plugin: 'kotlin-android'
+            project.apply plugin: 'kotlin-android-extensions'
+            project.description "lib"
+            //公共的android{}闭包中的配置
+            setAndroidConfig project.android
+
+            project.android {
+                defaultConfig {
+                    defaultPublishConfig 'release'
+                    publishNonDefault true
+                }
+            }
+            //公共的dependencies{}闭包中的依赖
+            setDependencies project.dependencies
+    }
+
+    //设置公共的android{}闭包中的配置
+    setAndroidConfig = {
+        android ->
+            //编译的的SDK版本号
+            android.compileSdkVersion rootProject.ext.androidConfig.compileSdkVersion
+            //SDK中构建工具的版本
+            android.buildToolsVersion rootProject.ext.androidConfig.buildToolsVersion
+            //android{}闭包中defaultConfig{}闭包的公共配置 是默认配置，如果没有其它的配置覆盖，就会使用这里的。
+            android.defaultConfig {
+                //基于那个版本的SDK进行开发（向前兼容）
+                targetSdkVersion rootProject.ext.defaultConfig.targetSdkVersion
+                //支持的设备的最低SDK版本
+                minSdkVersion rootProject.ext.defaultConfig.minSdkVersion
+
+                testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+                //一般只需要这两个，视具体项目而定
+                ndk {
+                    abiFilters "armeabi-v7a", "arm64-v8a"
+                }
+                //只保留和默认资源 可以减少包的体积
+                resConfigs ('zh-rCN')
+                //开启分包
+                multiDexEnabled true
+            }
+            //签名文件设置 要写在buildTypes之前
+            android.signingConfigs {
+                //视项目情况而定
+//                debug {
+//                    storeFile file('keystore/app_keystore')
+//                    storePassword '123456'
+//                    keyAlias 'abc123'
+//                    keyPassword 'abc123'
+//                }
+            }
+            //android{}闭包中buildTypes{}闭包 构建类型的配置 视项目情况决定
+            android.buildTypes {
+
+            }
+
+            android.compileOptions {
+                sourceCompatibility JavaVersion.VERSION_1_8
+                targetCompatibility JavaVersion.VERSION_1_8
+            }
+
+            android.kotlinOptions {
+                jvmTarget = '1.8'
+            }
+    }
+
+
+    //设置依赖
+    setDependencies = {
+        dependencies ->
+            //获取common_dependencies.gradle 中的配置map
+            def ext = rootProject.ext.dependencies
+
+            dependencies.implementation fileTree(dir: 'libs', include: ['*.jar'])
+            dependencies.implementation 'androidx.appcompat:appcompat:1.1.0'
+            dependencies.testImplementation 'junit:junit:4.12'
+            dependencies.androidTestImplementation 'androidx.test.ext:junit:1.1.1'
+            dependencies.androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+
+            dependencies.implementation ext.constraintlayout
+            dependencies.implementation ext.kotlin_stdlib
+            dependencies.implementation ext.core_ktx
+            dependencies.implementation ext.material
+    }
+
+}

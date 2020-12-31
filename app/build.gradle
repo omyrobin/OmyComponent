@@ -1,0 +1,11 @@
+rootProject.ext.setAppDefaultConfig project
+
+dependencies {
+
+    if(!isModule.toBoolean()){
+        implementation project(':module_details')
+        implementation project(':module_login')
+        implementation project(':module_home')
+    }
+    implementation project(':common')
+}

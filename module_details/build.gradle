@@ -1,0 +1,27 @@
+if (isModule.toBoolean()) {
+    rootProject.ext.setAppDefaultConfig project
+} else {
+    rootProject.ext.setLibDefaultConfig project
+}
+android {
+    sourceSets {
+        main {
+            if (isModule.toBoolean()) {
+                res.srcDirs 'src/main/res', 'src/main/module/res'
+                manifest.srcFile 'src/main/module/AndroidManifest.xml'
+            } else {
+                java {
+                    exclude 'debug/**'
+                }
+                res {
+                    exclude 'src/main/module/res/**'
+                }
+                res.srcDirs 'src/main/res', 'src/main/module/res/'
+                manifest.srcFile 'src/main/AndroidManifest.xml'
+            }
+        }
+    }
+}
+dependencies {
+    implementation project(':common')
+}
