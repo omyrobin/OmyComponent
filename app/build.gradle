@@ -1,8 +1,75 @@
 rootProject.ext.setAppDefaultConfig project
 
+//app壳工程单独需要的配置信息
+android {
+    defaultConfig {
+        //All flavors must now belong to a named flavor dimension. 解决多渠道bug
+        //版本名后面添加一句话，意思就是flavor dimension 它的维度就是该版本号，这样维度就是都是统一的了
+        flavorDimensions "versionCode"
+    }
+    //签名文件设置 要写在buildTypes之前
+    signingConfigs {
+        def appStoreFile = "/Users/omyrobin/.android/debug.keystore"
+        def appStorePassword = "android"
+        def appKeyAlias = "androiddebugkey"
+        def appKeyPassword = "android"
+        //视项目情况而定
+        debug {
+            storeFile file(appStoreFile)
+            storePassword appStorePassword
+            keyAlias appKeyAlias
+            keyPassword appKeyPassword
+        }
+
+        //此处可以考虑优化 不对外暴露签名信息
+        release {
+            storeFile file("keystore.jks")
+            storePassword "123456"
+            keyAlias "app_keystore"
+            keyPassword "123456"
+        }
+    }
+    //构建类型的配置 视项目情况决定
+    buildTypes {
+        debug {
+            //关闭混淆
+            minifyEnabled false
+            signingConfig android.signingConfigs.debug
+            //debug包包名增加.debug后缀这样可以同时安装debug和release两个apk在同一个设备中
+            applicationIdSuffix '.debug'
+            //可调试
+            debuggable true
+        }
+
+        release {
+            //关闭混淆
+            minifyEnabled false
+            signingConfig android.signingConfigs.release
+        }
+    }
+    //使用官方的多渠道打包方式 ----- 其他方Python打包 、 apk zip Comment可试项目情况而定
+    productFlavors {
+        //如渠道有特殊的业务需求 例如某些渠道不添加某些依赖可以在下方进行配置 此处不做演示
+        qudao1 {
+            //为当前渠道包添加额外的包名后缀 注意和defaultConfig中的叠加
+            applicationIdSuffix ".qudao1"
+        }
+
+        qudao2 {
+            //为当前渠道包添加额外的包名后缀 注意和defaultConfig中的叠加
+            applicationIdSuffix ".qudao2"
+        }
+
+        //给AndroidManifest中的meta-data设置渠道名称
+        productFlavors.all {
+            flavors -> flavors.manifestPlaceholders = [channel: name]
+        }
+    }
+}
+
 dependencies {
 
-    if(!isModule.toBoolean()){
+    if (!isModule.toBoolean()) {
         implementation project(':module_details')
         implementation project(':module_login')
         implementation project(':module_home')

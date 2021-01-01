@@ -16,6 +16,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <!--   渠道名称 在gradle的productFlavors闭包中可配置     -->
+        <meta-data android:name="channel" android:value="${channel}"/>
     </application>
+
+
 
 </manifest>

@@ -31,6 +31,7 @@ ext {
 
             project.android {
                 defaultConfig {
+                    //无论主module以什么build type来构建, library都将以release模式来构建 !!
                     defaultPublishConfig 'release'
                     publishNonDefault true
                 }
@@ -52,6 +53,11 @@ ext {
                 targetSdkVersion rootProject.ext.defaultConfig.targetSdkVersion
                 //支持的设备的最低SDK版本
                 minSdkVersion rootProject.ext.defaultConfig.minSdkVersion
+                //https://developer.android.com/studio/publish/versioning?hl=zh-cn 可参考
+                //内部版本号 写在公共部分表示所有的module都是用这个内部版本 如需要差异请在公共部分移除 写到项目的build.gradle中
+                versionCode rootProject.ext.defaultConfig.versionCode
+                //用作向用户显示的版本号
+                versionName rootProject.ext.defaultConfig.versionName
 
                 testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
                 //一般只需要这两个，视具体项目而定
@@ -59,23 +65,9 @@ ext {
                     abiFilters "armeabi-v7a", "arm64-v8a"
                 }
                 //只保留和默认资源 可以减少包的体积
-                resConfigs ('zh-rCN')
+                resConfigs('zh-rCN')
                 //开启分包
                 multiDexEnabled true
-            }
-            //签名文件设置 要写在buildTypes之前
-            android.signingConfigs {
-                //视项目情况而定
-//                debug {
-//                    storeFile file('keystore/app_keystore')
-//                    storePassword '123456'
-//                    keyAlias 'abc123'
-//                    keyPassword 'abc123'
-//                }
-            }
-            //android{}闭包中buildTypes{}闭包 构建类型的配置 视项目情况决定
-            android.buildTypes {
-
             }
 
             android.compileOptions {
