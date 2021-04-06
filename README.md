@@ -17,3 +17,6 @@ if (isModule.toBoolean()) {
 }
 ```
 如有特殊需求可以参考项目
+
+# 注意
+如果发现 isModule = true module仍然不能单独打包成独立的apk 请检查Android Studio左侧导航栏中的Build Variants中的构建渠道 将所有module的Active Build Varint改为Debug
