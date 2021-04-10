@@ -1,3 +1,6 @@
+include ':route_compiler'
+include ':route_annotation'
+include ':route_api'
 include ':common'
 include ':module_details'
 include ':module_login'

@@ -5,6 +5,13 @@ if (isModule.toBoolean()) {
 }
 
 android {
+
+    kapt {
+        arguments {
+            arg("ROUTER_MODULE_NAME", project.getName())
+        }
+    }
+
     sourceSets {
         main {
             if (isModule.toBoolean()) {

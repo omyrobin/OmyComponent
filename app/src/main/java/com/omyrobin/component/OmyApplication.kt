@@ -3,7 +3,13 @@ package com.omyrobin.component
 import android.app.Activity
 import android.app.Application
 import android.os.Bundle
+import android.util.Log
 import com.omyrobin.component.common.BaseApplication
+import com.omyrobin.route_api.Orouter
+import com.omyrobin.route_api.RouteMeta
+import java.lang.reflect.ParameterizedType
+import java.lang.reflect.Type
+
 
 /**
  * @Author: omyrobin
@@ -15,6 +21,7 @@ class OmyApplication : BaseApplication(), Application.ActivityLifecycleCallbacks
     override fun onCreate() {
         super.onCreate()
         registerActivityLifecycleCallbacks(this)
+        Orouter.getInstance().init(this)
     }
 
 
@@ -38,8 +45,6 @@ class OmyApplication : BaseApplication(), Application.ActivityLifecycleCallbacks
 
     override fun onActivityDestroyed(activity: Activity) {
     }
-
-
 
 
 }

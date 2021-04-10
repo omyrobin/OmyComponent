@@ -1,1 +1,7 @@
 rootProject.ext.setLibDefaultConfig project
+
+dependencies {
+    //common层中单独使用api传递依赖的方式引入route_annotation 注解java library
+    api project(':route_annotation')
+    api project(':route_api')
+}

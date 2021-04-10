@@ -4,7 +4,7 @@ ext {
         project ->
             project.apply plugin: 'com.android.application'
             project.apply plugin: 'kotlin-android'
-            project.apply plugin: 'kotlin-android-extensions'
+            project.apply plugin: 'kotlin-kapt'
             project.description "app"
             //公共的android{}闭包中的配置
             setAndroidConfig project.android
@@ -13,6 +13,12 @@ ext {
                 defaultConfig {
                     //设置application模式下的applicationId 必须有
                     applicationId rootProject.ext.defaultConfig.applicationId + "." + project.name
+                    //apt传参 路由框架需要的参数 com.omyrobin.route_compiler.RouteProcessor
+                    javaCompileOptions {
+                        annotationProcessorOptions {
+                            arguments = [ROUTER_MODULE_NAME: project.getName()]
+                        }
+                    }
                 }
             }
             //公共的dependencies{}闭包中的依赖
@@ -24,7 +30,7 @@ ext {
         project ->
             project.apply plugin: 'com.android.library'
             project.apply plugin: 'kotlin-android'
-            project.apply plugin: 'kotlin-android-extensions'
+            project.apply plugin: 'kotlin-kapt'
             project.description "lib"
             //公共的android{}闭包中的配置
             setAndroidConfig project.android
@@ -34,6 +40,12 @@ ext {
                     //无论主module以什么build type来构建, library都将以release模式来构建 !!
                     defaultPublishConfig 'release'
                     publishNonDefault true
+                    //apt传参 路由框架需要的参数 com.omyrobin.route_compiler.RouteProcessor
+                    javaCompileOptions {
+                        annotationProcessorOptions {
+                            arguments = [ROUTER_MODULE_NAME: project.getName()]
+                        }
+                    }
                 }
             }
             //公共的dependencies{}闭包中的依赖
@@ -76,7 +88,7 @@ ext {
             }
 
             android.kotlinOptions {
-                jvmTarget = '1.8'
+                jvmTarget = JavaVersion.VERSION_1_8.toString()
             }
     }
 
@@ -97,6 +109,9 @@ ext {
             dependencies.implementation ext.kotlin_stdlib
             dependencies.implementation ext.core_ktx
             dependencies.implementation ext.material
+            //所有项目都依赖route_compiler注解处理器
+            dependencies.kapt project(':route_compiler')
+
     }
 
 }

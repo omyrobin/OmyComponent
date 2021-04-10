@@ -48,23 +48,23 @@ android {
         }
     }
     //使用官方的多渠道打包方式 ----- 其他方Python打包 、 apk zip Comment可试项目情况而定
-    productFlavors {
-        //如渠道有特殊的业务需求 例如某些渠道不添加某些依赖可以在下方进行配置 此处不做演示
-        qudao1 {
-            //为当前渠道包添加额外的包名后缀 注意和defaultConfig中的叠加
-            applicationIdSuffix ".qudao1"
-        }
-
-        qudao2 {
-            //为当前渠道包添加额外的包名后缀 注意和defaultConfig中的叠加
-            applicationIdSuffix ".qudao2"
-        }
-
-        //给AndroidManifest中的meta-data设置渠道名称
-        productFlavors.all {
-            flavors -> flavors.manifestPlaceholders = [channel: name]
-        }
-    }
+//    productFlavors {
+//        //如渠道有特殊的业务需求 例如某些渠道不添加某些依赖可以在下方进行配置 此处不做演示
+//        qudao1 {
+//            //为当前渠道包添加额外的包名后缀 注意和defaultConfig中的叠加
+//            applicationIdSuffix ".qudao1"
+//        }
+//
+//        qudao2 {
+//            //为当前渠道包添加额外的包名后缀 注意和defaultConfig中的叠加
+//            applicationIdSuffix ".qudao2"
+//        }
+//
+//        //给AndroidManifest中的meta-data设置渠道名称
+//        productFlavors.all {
+//            flavors -> flavors.manifestPlaceholders = [channel: name]
+//        }
+//    }
 }
 
 dependencies {

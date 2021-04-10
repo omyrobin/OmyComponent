@@ -6,6 +6,7 @@
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:name=".OmyApplication"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.OmyComponent">
@@ -18,7 +19,7 @@
         </activity>
 
         <!--   渠道名称 在gradle的productFlavors闭包中可配置     -->
-        <meta-data android:name="channel" android:value="${channel}"/>
+<!--        <meta-data android:name="channel" android:value="${channel}"/>-->
     </application>
 
 

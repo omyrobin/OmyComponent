@@ -4,6 +4,13 @@ if (isModule.toBoolean()) {
     rootProject.ext.setLibDefaultConfig project
 }
 android {
+
+    kapt {
+        arguments {
+            arg("ROUTER_MODULE_NAME", project.getName())
+        }
+    }
+
     sourceSets {
         main {
             if (isModule.toBoolean()) {
