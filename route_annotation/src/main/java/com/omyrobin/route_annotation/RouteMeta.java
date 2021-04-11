@@ -1,10 +1,5 @@
-package com.omyrobin.route_api;
+package com.omyrobin.route_annotation;
 
-/**
- * @Author: omyrobin
- * @CreateDate: 2021/4/10 11:12 AM
- * @Description:
- */
 public class RouteMeta {
 
     private Class<?> destination;
@@ -23,5 +18,17 @@ public class RouteMeta {
 
     public static RouteMeta build(Class<?> destination, String path) {
         return new RouteMeta(destination, path, null);
+    }
+
+    public Class<?> getDestination() {
+        return destination;
+    }
+
+    public String getPath() {
+        return path;
+    }
+
+    public String getGroup() {
+        return group;
     }
 }

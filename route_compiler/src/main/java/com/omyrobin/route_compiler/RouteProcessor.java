@@ -150,11 +150,11 @@ public class RouteProcessor extends AbstractProcessor {
         StringBuilder sb = new StringBuilder();
 
         sb.append("package com.omyrobin.component;\n");
-        sb.append("import com.omyrobin.route_api.RouteMeta;\n");
+        sb.append("import com.omyrobin.route_annotation.RouteMeta;\n");
         sb.append("import android.app.Activity;\n");
         sb.append("import com.omyrobin.route_api.IRouterRegister;\n");
         sb.append("import java.util.Map;\n");
-        //导入 WMActivity、FoodActivity
+
         for (Element element : routeElements) {
             String packageName = elementUtils.getPackageOf(element).getQualifiedName().toString();
             //获取类的简单类名
@@ -163,27 +163,26 @@ public class RouteProcessor extends AbstractProcessor {
             //最终生成的类文件名
             String finalClassName = className + "$$Route";
 
-
             TypeElement typeElement = (TypeElement) element;
-            sb.append("import ");
-            sb.append(typeElement.getQualifiedName());
-            sb.append(";\n");
+            sb.append("import "+ typeElement.getQualifiedName() + ";\n");
 
             //类
             sb.append("public class ");
-            sb.append(finalClassName + " implements IRouterRegister {\n");
+            sb.append(finalClassName);
+            sb.append(" implements IRouterRegister {\n");
             sb.append("public void loadInto(Map<String, RouteMeta> atlas) {\n");
 
             //获得注解
             Route route = element.getAnnotation(Route.class);
-            //函数体 paths.put(xx,xx.class)
+            //函数体
             sb.append("atlas.put(\"");
             sb.append(route.path());
             sb.append("\",");
             sb.append("RouteMeta.build(");
             sb.append(element.getSimpleName());
             sb.append(".class,\"");
-            sb.append(route.path() + "\"));");
+            sb.append(route.path());
+            sb.append("\"));");
             sb.append("}\n");
             sb.append("}");
 

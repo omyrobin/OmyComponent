@@ -1,7 +1,13 @@
 package com.omyrobin.route_api;
 
 import android.app.Application;
+import android.content.Context;
+import android.content.Intent;
+import android.text.TextUtils;
 import android.util.Log;
+
+import com.omyrobin.route_annotation.RouteMeta;
+import com.omyrobin.route_api.utils.ClassUtils;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -15,6 +21,8 @@ import java.util.Set;
 public class Orouter {
 
     private static final String TAG = Orouter.class.getSimpleName();
+
+    private Context mContext;
 
     /**
      * 路由表
@@ -33,6 +41,8 @@ public class Orouter {
     }
 
     public void init(Application application) {
+
+        mContext = application;
 
         try {
             Set<String> classNames = ClassUtils.getFileNameByPackageName(application, "com.omyrobin");
@@ -53,8 +63,25 @@ public class Orouter {
         }
     }
 
-    public RouteMeta build(String path) {
-        return routerMap.get(path);
+    /**
+     * 简易的Activity 跳转
+     * @param path
+     * @return
+     */
+    public void navigation(String path) {
+        if(TextUtils.isEmpty(path)){
+            throw new RuntimeException("path must be not null");
+        }
+        RouteMeta routeMeta = routerMap.get(path);
+
+        //找不动 目前无降级策略 直接抛异常
+        if(routeMeta == null){
+            throw  new RuntimeException("not found route");
+        }
+
+        Intent intent = new Intent(mContext, routeMeta.getDestination());
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        mContext.startActivity(intent);
     }
 
 }

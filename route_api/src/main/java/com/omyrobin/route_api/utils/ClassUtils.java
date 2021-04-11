@@ -1,4 +1,4 @@
-package com.omyrobin.route_api;
+package com.omyrobin.route_api.utils;
 
 import android.app.Application;
 import android.content.Context;

@@ -2,6 +2,7 @@ package com.omyrobin.component
 
 import android.content.pm.PackageManager
 import android.os.Bundle
+import android.view.View
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.omyrobin.route_annotation.Route
@@ -24,6 +25,19 @@ class MainActivity : AppCompatActivity() {
 //        val tv_app = findViewById<TextView>(R.id.tv_app)
 //        tv_app.text = "App壳工程_${msg}"
     }
+
+    fun jumpHome(view: View){
+        Orouter.getInstance().navigation( "module_home/ModuleHomeActivity")
+    }
+
+    fun jumpDetails(view: View){
+        Orouter.getInstance().navigation("module_details/ModuleDetailsMainActivity")
+    }
+
+    fun jumpLogin(view: View){
+        Orouter.getInstance().navigation("module_login/ModuleLoginActivity")
+    }
+
 
 
 }

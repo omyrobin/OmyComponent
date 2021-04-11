@@ -2,4 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.omyrobin.component.login">
 
+    <application>
+        <activity android:name=".ModuleLoginActivity"/>
+    </application>
 </manifest>
