@@ -4,7 +4,7 @@ import android.app.Activity
 import android.app.Application
 import android.os.Bundle
 import com.omyrobin.component.common.BaseApplication
-import com.omyrobin.route_api.Orouter
+import com.omyrobin.router_api.Orouter
 
 
 /**

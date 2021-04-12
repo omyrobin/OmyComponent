@@ -1,9 +1,9 @@
-include ':route_compiler'
-include ':route_annotation'
-include ':route_api'
 include ':common'
 include ':module_details'
 include ':module_login'
 include ':module_home'
 include ':app'
+include ':router_annotation'
+include ':router_compiler'
+include ':router_api'
 rootProject.name = "OmyComponent"

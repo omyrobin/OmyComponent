@@ -3,9 +3,8 @@ package com.omyrobin.component.details
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.Toolbar
-import com.omyrobin.route_annotation.Route
-import com.omyrobin.route_api.Orouter
+import com.omyrobin.router_annotation.Route
+import com.omyrobin.router_api.Orouter
 
 /**
  * @Author: omyrobin

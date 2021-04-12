@@ -109,8 +109,8 @@ ext {
             dependencies.implementation ext.kotlin_stdlib
             dependencies.implementation ext.core_ktx
             dependencies.implementation ext.material
-            //所有项目都依赖route_compiler注解处理器
-            dependencies.kapt project(':route_compiler')
+            //所有项目都依赖router_compiler注解处理器
+            dependencies.kapt project(':router_compiler')
 
     }
 
