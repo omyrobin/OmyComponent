@@ -17,3 +17,14 @@ if (isModule.toBoolean()) {
 }
 ```
 如有特殊需求可以参考项目
+
+# OmyComponent/feature/2.0.0_route
+
++ 新增router_annotation   java-library 注解库
++ 新增router_compiler     java-library 注解处理库
++ 新增router_api          android-library 注解核心课
+
+
+```
+ Orouter.getInstance().navigation("module_home/ModuleHomeActivity")
+```
