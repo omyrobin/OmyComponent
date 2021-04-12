@@ -5,6 +5,7 @@ import com.omyrobin.router_annotation.Route;
 
 import java.io.IOException;
 import java.io.OutputStream;
+import java.io.Writer;
 import java.util.Set;
 
 import javax.annotation.processing.AbstractProcessor;
@@ -115,27 +116,37 @@ public class RouteProcessor extends AbstractProcessor {
 //            String finalClassName = className + "$$Route";
 //
 //            try {
-//                JavaFileObject sourceFile = filer.createClassFile(packageName +"." + finalClassName);
+//                JavaFileObject sourceFile = filer.createClassFile(packageName + "." + finalClassName);
 //                Writer writer = sourceFile.openWriter();
 //                Route route  = element.getAnnotation(Route.class);
-//                writer.append("package " + packageName + ";\n");
-//                System.out.println("package " + packageName + ";\n");
-//                writer.append("import com.omyrobin.route_api.RouteMeta;\n");
-//                System.out.println("import com.omyrobin.route_api.RouteMeta;\n");
-//                writer.append("import " + ((TypeElement)element).getQualifiedName() +";\n");
-//                System.out.println("import " + ((TypeElement)element).getQualifiedName()+";\n");
+//                //包
+//                writer.append("package ");
+//                writer.append(packageName);
+//                writer.append( ";\n");
+//                //引用
+//                writer.append("import com.omyrobin.router_annotation.RouteMeta;\n");
+//                writer.append("import com.omyrobin.router_api.IRouterRegister;\n");
+//                writer.append("import ");
+//                writer.append(((TypeElement)element).getQualifiedName());
+//                writer.append(";\n");
 //                writer.append("import java.util.Map;\n");
-//                System.out.println("import java.util.Map;\n");
-//                writer.append("public class " +  finalClassName + " {\n");
-//                System.out.println("public class " +  finalClassName + " {\n");
-//                writer.append("public void loadInto() {\n");
-//                System.out.println("public void loadInto() {\n");
-//                writer.append("@Override");
+//                //类
+//                writer.append("public class ");
+//                writer.append(finalClassName);
+//                writer.append(" implements IRouterRegister {\n");
+//                //函数定义
 //                writer.append("public void loadInto(Map<String, RouteMeta> atlas) {\n");
-//                writer.append("atlas.put(\"" + route.path() +"\", RouteMeta.build(" + className + ".class,\"" +  route.path() + "\",\"" + route.group() +"\"));\n");
-//                writer.append("}\n}");
-//                System.out.println("}\n}");
-//
+//                //函数体
+//                writer.append("atlas.put(\"");
+//                writer.append(route.path());
+//                writer.append("\",");
+//                writer.append("RouteMeta.build(");
+//                writer.append(element.getSimpleName());
+//                writer.append(".class,\"");
+//                writer.append(route.path());
+//                writer.append("\"));");
+//                writer.append("}\n");
+//                writer.append("}");
 //
 //                writer.close();
 //            } catch (IOException e) {
