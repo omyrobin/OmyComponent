@@ -20,3 +20,14 @@ if (isModule.toBoolean()) {
 
 # 注意
 如果发现 isModule = true module仍然不能单独打包成独立的apk 请检查Android Studio左侧导航栏中的Build Variants中的构建渠道 将所有module的Active Build Varint改为Debug
+
+# OmyComponent/feature/2.0.0_route
+
++ 新增router_annotation   java-library 注解库
++ 新增router_compiler     java-library 注解处理库
++ 新增router_api          android-library 注解核心库
+
+
+```
+ Orouter.getInstance().navigation("module_home/ModuleHomeActivity")
+```
