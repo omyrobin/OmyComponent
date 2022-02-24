@@ -7,3 +7,7 @@ include ':router_annotation'
 include ':router_compiler'
 include ':router_api'
 rootProject.name = "OmyComponent"
+
+gradle.taskGraph.beforeTask { task ->
+    println(task.name)
+}

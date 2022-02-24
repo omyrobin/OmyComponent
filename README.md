@@ -10,6 +10,7 @@ isModule = false
 
 
 ```
+//由于每个.gralde文件都表示一个Project对象, 相当于我将我当前的Project对象传入ext中声明的函数中，对Project对象进行配置
 if (isModule.toBoolean()) {
     rootProject.ext.setAppDefaultConfig project
 } else {

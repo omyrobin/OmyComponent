@@ -17,7 +17,6 @@ class OmyApplication : BaseApplication(), Application.ActivityLifecycleCallbacks
     override fun onCreate() {
         super.onCreate()
         registerActivityLifecycleCallbacks(this)
-        Orouter.getInstance().init(this)
     }
 
 

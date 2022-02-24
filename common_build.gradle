@@ -74,7 +74,7 @@ ext {
                 testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
                 //一般只需要这两个，视具体项目而定
                 ndk {
-                    abiFilters "armeabi-v7a", "arm64-v8a"
+                    abiFilters "armeabi-v7a", "arm64-v8a", "x86"
                 }
                 //只保留和默认资源 可以减少包的体积
                 resConfigs('zh-rCN')
@@ -93,7 +93,7 @@ ext {
     }
 
 
-    //设置依赖
+    //设置公共的dependencies{}闭包中的配置
     setDependencies = {
         dependencies ->
             //获取common_dependencies.gradle 中的配置map

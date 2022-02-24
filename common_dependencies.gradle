@@ -5,5 +5,6 @@ ext {
             "kotlin_stdlib"   : "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version",
             "core_ktx"        : "androidx.core:core-ktx:1.2.0",
             "material"        : "com.google.android.material:material:1.1.0",
+
     ]
 }

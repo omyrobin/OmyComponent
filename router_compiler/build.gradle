@@ -20,7 +20,7 @@ dependencies {
 
 }
 
-//控制台输入UTF-8
+//控制台输入UTF-83
 tasks.withType(JavaCompile){
     options.encoding = "UTF-8"
 }
